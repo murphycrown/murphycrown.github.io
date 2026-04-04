@@ -1,0 +1,142 @@
+/* ============================================================
+   THEME — Tailwind config + custom styles for this portfolio
+   ============================================================ */
+
+/* ---------- Tailwind config ----------
+   Edit colors, fonts, and animations here.
+   The `primary` palette is blue-centric (50–900).
+   The `dark` palette controls the dark backgrounds. */
+</script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',   // dark mode toggled via .dark on <html>
+      theme: {
+        extend: {
+          colors: {
+            primary: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' },
+            dark: { 900:'#0a0e1a',800:'#0f1629',700:'#151d35',600:'#1a2540' }
+          },
+          fontFamily: { mono: ['"Fira Code"', 'monospace'] },
+          animation: {
+            'float':      'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'glow':       'glow 2s ease-in-out infinite alternate',
+            'slide-up':   'slideUp 0.6s ease-out forwards',
+            'fade-in':    'fadeIn 0.8s ease-out forwards',
+            'spin-slow':  'spin 20s linear infinite',
+          },
+          /* ---- Custom keyframes ----
+             To add a new animation, define the value
+             in tailwind.config.animation above and
+             add the matching animation block below. */
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%':       { transform: 'translateY(-20px)' },
+            },
+            glow: {
+              '0%':   { boxShadow: '0 0 5px #3b82f6, 0 0 10px #3b82f6' },
+              '100%': { boxShadow: '0 0 20px #3b82f6, 0 0 40px #3b82f6' },
+            },
+            slideUp: {
+              '0%':   { transform: 'translateY(40px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)',    opacity: '1' },
+            },
+            fadeIn: {
+              '0%':   { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ============================================================
+       Custom CSS
+       ============================================================ */
+
+<style>
+/* --- Resets --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; }
+
+/* --- Custom scrollbar --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0e1a; }
+::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+
+/* --- Typing cursor blink --- */
+.typing-cursor { animation: blink 0.7s infinite; }
+@keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+
+/* --- Gradient text (used for headings / counters) --- */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Glassmorphism card / container --- */
+.glass {
+  backdrop-filter: blur(12px);
+  background: rgba(15, 22, 41, 0.7);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+/* Light mode glass */
+.light .glass {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+/* --- Glow effect on hover --- */
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(59,130,246,0.4), 0 0 40px rgba(59,130,246,0.15);
+}
+
+/* --- Floating particles --- */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #3b82f6;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* --- Scroll reveal (elements start hidden, become visible on scroll) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Light mode overrides --- */
+html:not(.dark) body { background: #f8fafc; color: #0f172a; }
+html:not(.dark) .section-bg  { background: #f8fafc; }
+html:not(.dark) .section-bg-alt { background: #eff6ff; }
+html:not(.dark) .card-bg     { background: #fff; border-color: #bfdbfe; }
+html:not(.dark) .card-bg:hover { box-shadow: 0 0 20px rgba(59,130,246,0.15); }
+html:not(.dark) .nav-bg      { background: rgba(248,250,252,0.8); border-color: #bfdbfe; }
+html:not(.dark) .text-muted  { color: #64748b; }
+html:not(.dark) .particle    { background: #2563eb; }
+
+/* --- Smooth theme transition --- */
+*, *::before, *::after {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.2s ease;
+}
+
+/* --- Hero orbit ring --- */
+.orbit { animation: spin 20s linear infinite; }
+@keyframes spin { from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+</style>

@@ -1,0 +1,100 @@
+/* ============================================================
+   CUSTOM CSS — styles beyond Tailwind
+   ============================================================
+   Sections:
+     1. Resets
+     2. Scrollbar
+     3. Typing cursor
+     4. Gradient text
+     5. Glassmorphism
+     6. Glow hover effect
+     7. Floating particles
+     8. Scroll reveal
+     9. Light mode overrides
+     10. Theme transition
+     11. Hero orbit
+   ============================================================ */
+
+/* 1. Resets */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; }
+
+/* 2. Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0e1a; }
+::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+
+/* 3. Typing cursor blink (used by the hero typing animation) */
+.typing-cursor { animation: blink 0.7s infinite; }
+@keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+
+/* 4. Gradient text — used for accent headings, counters, etc. */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 5. Glassmorphism — semi-transparent cards / sections */
+.glass {
+  backdrop-filter: blur(12px);
+  background: rgba(15, 22, 41, 0.7);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+/* Light mode glass variant */
+.light .glass {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+/* 6. Glow effect on hover — applies a blue outer shadow */
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(59,130,246,0.4), 0 0 40px rgba(59,130,246,0.15);
+}
+
+/* 7. Floating particles — small dots in the hero background */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #3b82f6;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* 8. Scroll reveal — elements start invisible & slide up,
+   then .active is added by JavaScript on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 9. Light mode overrides — these kick in when <html> lacks .dark */
+html:not(.dark) body          { background: #f8fafc; color: #0f172a; }
+html:not(.dark) .section-bg    { background: #f8fafc; }
+html:not(.dark) .section-bg-alt { background: #eff6ff; }
+html:not(.dark) .card-bg       { background: #fff; border-color: #bfdbfe; }
+html:not(.dark) .card-bg:hover { box-shadow: 0 0 20px rgba(59,130,246,0.15); }
+html:not(.dark) .nav-bg        { background: rgba(248,250,252,0.8); border-color: #bfdbfe; }
+html:not(.dark) .text-muted    { color: #64748b; }
+html:not(.dark) .particle      { background: #2563eb; }
+
+/* 10. Smooth theme transitions on all elements */
+*, *::before, *::after {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.2s ease;
+}
+
+/* 11. Hero orbit ring animation */
+.orbit { animation: spin 20s linear infinite; }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
