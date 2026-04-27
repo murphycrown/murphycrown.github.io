@@ -17,6 +17,7 @@
   const typingElement = document.getElementById('typingText');
   if (!typingElement) return;
 
+  
   const textToType    = 'Mahammad Mirzazada';  // ← change your name here
   const typeSpeed     = 200;   // ms per character when typing
   const deleteSpeed   = 100;   // ms per character when deleting
